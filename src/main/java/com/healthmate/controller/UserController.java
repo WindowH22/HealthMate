@@ -22,6 +22,12 @@ public class UserController {
 		return "user/insertUser";
 	}
 	
+	//회원상세보기
+	@GetMapping("/user/updateUser")
+	public String updateUser() {
+		return "user/updateUser";
+	}
+	
 	//회원 가입처리
 	@PostMapping("/auth/insertUser")
 	public @ResponseBody String insertUser(@RequestBody User user) {
@@ -37,4 +43,6 @@ public class UserController {
 		}
 		
 	}
+	
+	
 }

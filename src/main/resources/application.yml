@@ -27,7 +27,7 @@ spring:
     hibernate:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-      ddl-auto: create  #create나 update만 쓴다.
+      ddl-auto: update  #create나 update만 쓴다.
       use-new-id-generator-mappings: false
     properties:
       hibernate.format_sql: true
