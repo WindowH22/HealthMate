@@ -7,11 +7,25 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="mb-3 mt-3">username: ${principal.username }</div>
-	<div class="mb-3 mt-3">email:${principal.email }</div>
-	<div class="mb-3 mt-3">gender:${principal.gender }</div>
-	<div class="mb-3 mt-3">purpose:${principal.purpose }</div>
+	<div class="mx-auto" style="margin-top: 20px; width: 200px;"><h2>회원 상세보기</h2></div>
+	
+	<div class="grid">
+		<div class="p-3 mb-2 bg-light">
+			username:<span class="ms-2">${principal.username }</span>
+		</div>
 
+		<div class="p-3 mb-2 bg-light">
+			email:<span class="ms-2">${principal.email }</span>
+		</div>
+
+		<div class="p-3 mb-2 bg-light">
+			gender:<span class="ms-2">${principal.gender }</span>
+		</div>
+
+		<div class="p-3 mb-2 bg-light">
+			purpose:<span class="ms-2">${principal.purpose }</span>
+		</div>
+	</div>
 
 
 
