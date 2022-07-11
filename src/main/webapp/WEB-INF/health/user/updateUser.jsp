@@ -9,7 +9,7 @@
 <body>
 	<div class="mx-auto" style="margin-top: 20px; width: 200px;"><h2>회원 상세보기</h2></div>
 	
-	<div class="grid">
+	<div style= "margin-left: 25%; margin-right: 25%">
 		<div class="p-3 mb-2 bg-light">
 			username:<span class="ms-2">${principal.username }</span>
 		</div>
@@ -26,7 +26,8 @@
 			purpose:<span class="ms-2">${principal.purpose }</span>
 		</div>
 	</div>
-
+	<div class = "mx-auto" style="width:100px"><a href="#" class="btn btn-secondary">수정 하기</a></div>
+	
 
 
 </body>
