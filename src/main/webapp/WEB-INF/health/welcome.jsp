@@ -5,13 +5,30 @@
 </head>
 
 <div class="container-fluid mt-3">
-	<div class="card">
-		<div class="card-body">
-			<h4 class="card-title">헬스메이트 메인화면입니다.</h4>
-			${principal.username }님 환영합니다.
-			<a href="#" class="btn btn-secondary">상세 보기</a>
+	<c:if test="${!empty postList }">
+		<div class="card">
+			<c:forEach var="post" items="${postList.content }">
+				<div class="card-body">
+					<h4 class="card-title">${post.title}</h4>
+					<a href="#" class="btn btn-secondary">상세 보기</a>
+				</div>
+			</c:forEach>
 		</div>
-	</div>
+		
+		<br>
+		<ul class="pagination justify-content-between">
+			
+			<li class="page-item <c:if test="${postList.first}">disabled</c:if>">
+			<a class="page-link" href="?page=${postList.number - 1 }">이전페이지</a></li> <!-- number는 현재페이지를 가르킨다. -->
+			<li class="page-item <c:if test="${postList.last}">disabled</c:if>">
+			<a class="page-link" href="?page=${postList.number + 1 }">다음 페이지</a></li>
+			<!-- 첫 페이지는 .first 마지막 페이지는 last  -->
+			
+		</ul>
+		
+	</c:if>
+
+
 </div>
 <%@ include file="./layout/footer.jsp"%>
 
