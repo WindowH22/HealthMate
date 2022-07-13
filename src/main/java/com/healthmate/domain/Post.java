@@ -36,7 +36,7 @@ public class Post {
 	@CreationTimestamp
 	private Timestamp createDate;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "MEMBER_ID")
 	private User user;
 }

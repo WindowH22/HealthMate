@@ -1,5 +1,7 @@
 package com.healthmate.controller;
 
+import java.util.Optional;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,18 +11,24 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.healthmate.domain.Post;
 import com.healthmate.domain.User;
+import com.healthmate.persistence.PostRepository;
 import com.healthmate.service.PostService;
 
 @Controller
 public class PostController {
 	@Autowired
 	private PostService postService;
+	
+	@Autowired
+	private PostRepository postRepository;
+	
 	
 	@GetMapping( {"","/"})
 	public String getPostList(Model model,
@@ -34,6 +42,22 @@ public class PostController {
 	public String insertPost() {
 		return "post/insertPost";
 	}
+	
+	// 글 상세보기
+	@GetMapping("post/get/{id}")
+	public String getPost(@PathVariable int id, Model model) {
+	
+		Optional<Post> findPost = postRepository.findById(id);
+		
+		if(findPost.isPresent()) {
+			model.addAttribute("findPost",findPost.get());
+			return "post/getPost";
+		}else {
+			return "welcome";
+		}
+}
+	
+	
 	
 	@PostMapping("post/insertPost")
 	@ResponseBody
