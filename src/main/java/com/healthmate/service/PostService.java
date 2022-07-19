@@ -25,4 +25,11 @@ public class PostService {
 		return postRepository.findAll(pageable);
 	}
 	
+	@Transactional
+	public void deletePost(int id) {
+		System.out.println("deletePostId :"+id);
+		postRepository.deleteById(id);
+	}
+	
+	
 }

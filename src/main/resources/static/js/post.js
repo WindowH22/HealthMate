@@ -4,20 +4,24 @@ let postObject = {
 	// init() 함수 선언 
 	init: function() {
 		let _this = this;
-		
+
 		// "#btn-save" 버튼에 "click" 이벤트가 발생하면 insertPost() 함수를 호출한다. 
 		$("#btn-insert").on("click", () => {
 			_this.insertPost();
 		});
+
+		$("#btn-delete").on("click", () => {
+			_this.deletePost();
+		});
 	},
-	
+
 	insertPost: function() {
 		alert("1:1 문의 등록 요청됨");
-		
+
 		let post = {
-			title : $("#title").val(),
-			content : $("#content").val()
-		}		
+			title: $("#title").val(),
+			content: $("#content").val()
+		}
 
 		// Ajax를 이용한 비동기 호출
 		$.ajax({
@@ -35,7 +39,29 @@ let postObject = {
 		});
 
 	},
+
+	deletePost: function() {
+		alert("1:1 문의 삭제 요청됨");
+
+		let id = $('#id').text();
+
+		// Ajax를 이용한 비동기 호출
+		$.ajax({
+			type: "DELETE", // 요청 방식
+			url: `/post/deletePost/`+id, // 요청 path
+			
+		}).done(function(response) {
+			alert(response);
+			location = "/";
+		}).fail(function(error) {
+			alert(JSON.stringify(error));
+		});
+
+	}
+
+
+
 }
- 
+
 // postObject 객체의 init() 함수 호출. 
 postObject.init();

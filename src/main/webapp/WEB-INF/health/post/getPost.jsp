@@ -29,7 +29,7 @@
 		</div>
 	</form>
 
-	<button id="btn-insert" class="btn btn-secondary">포스트수정</button>
+	
 </div>
 <script>
 	$(document).ready(function() {
