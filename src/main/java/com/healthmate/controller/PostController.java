@@ -47,15 +47,15 @@ public class PostController {
 	@GetMapping("post/get/{id}")
 	public String getPost(@PathVariable int id, Model model) {
 	
-		Optional<Post> findPost = postRepository.findById(id);
+		Optional<Post> post = postRepository.findById(id);
 		
-		if(findPost.isPresent()) {
-			model.addAttribute("findPost",findPost.get());
+		if(post.isPresent()) {
+			model.addAttribute("post",post.get());
 			return "post/getPost";
 		}else {
 			return "welcome";
 		}
-}
+	}
 	
 	
 	
