@@ -13,6 +13,12 @@ let postObject = {
 		$("#btn-delete").on("click", () => {
 			_this.deletePost();
 		});
+		
+		$("#btn-update").on("click", () => {
+			_this.updatePost();
+		});
+		
+		
 	},
 
 	insertPost: function() {
@@ -50,6 +56,31 @@ let postObject = {
 			type: "DELETE", // 요청 방식
 			url: `/post/deletePost/`+id, // 요청 path
 			
+		}).done(function(response) {
+			alert(response);
+			location = "/";
+		}).fail(function(error) {
+			alert(JSON.stringify(error));
+		});
+
+	},
+	
+	updatePost: function() {
+		alert("1:1 문의 수정 요청됨");
+
+		let data = {
+			id: $("#id").val(),
+			title: $("#title").val(),
+			content: $("#content").val()	
+			
+		}
+
+		// Ajax를 이용한 비동기 호출
+		$.ajax({
+			type: 'PUT',
+            url: '/post/updatePost/'+data.id,
+            contentType:'application/json; charset=utf-8',
+            data:JSON.stringify(data) 
 		}).done(function(response) {
 			alert(response);
 			location = "/";

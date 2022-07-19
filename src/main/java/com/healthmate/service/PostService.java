@@ -1,5 +1,7 @@
 package com.healthmate.service;
 
+import java.util.Optional;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,5 +33,18 @@ public class PostService {
 		postRepository.deleteById(id);
 	}
 	
+	@Transactional
+	public void updatePost(int id, Post requestPost) {
+		Optional<Post> findPost =postRepository.findById(id);
+		
+		if(findPost.isPresent()) {
+			Post post =findPost.get();
+			post.setTitle(requestPost.getTitle());
+			post.setContent(requestPost.getContent());
+		} else {
+			System.out.println("글 찾기 실패: 아이디를 찾을 수 없습니다.");
+		}
+		
+	}
 	
 }

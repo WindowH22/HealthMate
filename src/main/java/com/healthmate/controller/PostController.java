@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -76,5 +77,27 @@ public class PostController {
 		postService.deletePost(id);
 		return "글이 삭제되었습니다.";
 	}
+	
+	// 글 수정 페이지 이동
+	@GetMapping("post/updatePost/{id}")
+	public String updatePost(@PathVariable int id,Model model) {
+		Optional<Post> post = postRepository.findById(id);
+		
+		if(post.isPresent()) {
+			model.addAttribute("post",post.get());
+			return "post/updatePost";
+		}
+		return "";
+		
+	}
+	
+	// 글 수정하기
+	@PutMapping("post/updatePost/{id}")
+	@ResponseBody
+	public String updatePost(@PathVariable int id ,@RequestBody Post post) {
+		postService.updatePost(id,post);
+		return "수정이 완료되었습니다.";
+	}
+	
 	
 }
