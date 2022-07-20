@@ -21,14 +21,23 @@
 				<c:if test="${post.user.username == principal.username }">	
 				<a href="/post/updatePost/${post.id}" class="btn btn-warning">수정하기</a>
 				<button type="button" id="btn-delete" class="btn btn-danger">삭제하기</button> 
-				
 				</c:if>
 			</div>
-					
-			
 		</div>
 	</form>
 
+	<br>
+	<div class="card">
+		<form>
+			<input type="hidden" id="postId" value="${post.id }"/>
+			<div class="card-body">
+				<textarea id="reply-content" class="form-control" rows="1"></textarea>
+			</div>
+			<div class="card-footer">
+				<button type="button" id="btn-reply-insert" class="btn btn-primary">등록</button>
+			</div>
+		</form>
+	</div>
 	
 </div>
 <script>

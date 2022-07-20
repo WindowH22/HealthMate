@@ -1,7 +1,9 @@
 package com.healthmate.domain;
 
 import java.sql.Timestamp;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,12 +13,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.boot.jackson.JsonComponent;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
 
@@ -41,6 +46,11 @@ public class Post {
 	
 	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "MEMBER_ID")
+	@JoinColumn(name = "USER_ID")
 	private User user;
+	
+	@OneToMany(mappedBy = "post", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+	@JsonIgnoreProperties({"post"}) // 무한참조 방지
+	@OrderBy("id desc") // 내림차순;
+	private List<Reply> replys;
 }
