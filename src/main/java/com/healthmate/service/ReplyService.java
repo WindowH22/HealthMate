@@ -19,6 +19,12 @@ public class ReplyService {
 	private ReplyRepository replyRepository;
 	
 	// 댓글 등록
+	@Transactional
+	public String insertReply() {
+		
+		
+		return "댓글이 등록되었습니다.";
+	}
 	
 	// 댓글 삭제
 	
