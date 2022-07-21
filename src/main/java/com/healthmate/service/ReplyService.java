@@ -33,6 +33,11 @@ public class ReplyService {
 		replyRepository.save(requestReply);;
 		
 	}
+
+	@Transactional
+	public void deleteReply(int id) {
+		replyRepository.deleteById(id);
+	}
 	
 	// 댓글 삭제
 	

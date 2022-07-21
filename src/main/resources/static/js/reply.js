@@ -41,7 +41,25 @@ let replyObject = {
         
 
 	},
-
+	
+	// 댓글 삭제 함수 
+	replyDelete : function (postId,replyId) {
+        
+              
+        $.ajax({
+            type: 'DELETE',
+            url: `/post/${postId}/reply/${replyId}`,
+            contentType:'application/json; charset=utf-8',
+            
+        }).done(function(response) {
+            alert(response);
+            location = `/post/get/${postId}`;
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+        
+        
+    }
 	
 
 }
