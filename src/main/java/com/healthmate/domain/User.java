@@ -34,7 +34,6 @@ public class User {
 	
 	private String role;
 	
-	
 	// 성별
 	@Column(nullable = false)
 	private String gender;

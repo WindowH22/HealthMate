@@ -44,7 +44,6 @@ public class Post {
 	@CreationTimestamp
 	private Timestamp createDate;
 	
-	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "USER_ID")
 	private User user;

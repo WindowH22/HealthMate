@@ -2,12 +2,11 @@ package com.healthmate.controller;
 
 import java.util.Optional;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.healthmate.domain.Post;
 import com.healthmate.domain.User;
 import com.healthmate.persistence.PostRepository;
+import com.healthmate.security.jpa.UserDetailsImpl;
 import com.healthmate.service.PostService;
 
 @Controller
@@ -44,16 +44,19 @@ public class PostController {
 		return "post/insertPost";
 	}
 	
-	// 글동록 하기
-	@PostMapping("post/insertPost")
-	@ResponseBody
-	public String insertPost(@RequestBody Post post, HttpSession session) {
+	// 글 등록 하기
+		@PostMapping("/post/insertPost")
+		@ResponseBody
+		public String insertPost(@RequestBody Post post,
+				@AuthenticationPrincipal UserDetailsImpl userDetails) {
+			// Post 객체를 등록하기 위해서는 반드시 User 객체를 Post에 설정해야 한다.
+			// 그래야 Post가 POST 테이블에 등록될 때 FK(USER_ID) 컬럼에 회원의 PK(ID)를 등록해준다.
+			User user = userDetails.getUser();
+			post.setUser(user);
+			postService.insertPost(post);
+			return "새로운 1:1문의 를 등록했습니다.";
+		}
 
-		User Principal = (User) session.getAttribute("principal");
-		post.setUser(Principal);
-		postService.insertPost(post);
-		return "post/insertPost";
-	}
 
 	// 글 상세보기
 	@GetMapping("post/get/{id}")
@@ -63,6 +66,7 @@ public class PostController {
 
 		if (post.isPresent()) {
 			model.addAttribute("post", post.get());
+			System.out.println("아이디: "+post.get().getUser().getUsername());
 			return "post/getPost";
 		} else {
 			return "welcome";

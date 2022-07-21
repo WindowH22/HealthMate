@@ -14,7 +14,8 @@
 				<br>
 				포스트 번호: <span id="id"><i>${post.id }</i></span>
 				<br>
-				작성자 : ${post.user.username }
+				작성자 : ${post.user.username}
+				
 				<hr>
 				<!-- onclick="history.back()"이 동작하지않은 때 return false 를 적어주면 작동한다.  -->
 				<button class="btn btn-secondary" onclick="history.back(); return false">돌아가기</button>
