@@ -39,6 +39,24 @@
 		</form>
 	</div>
 	
+	<!-- 댓글 목록 -->
+	<div class="card">
+		<div class="card-header">댓글 리스트</div>
+		<ul id="reply-box" class="list-group">
+			<c:forEach var="reply" items="${post.replys}">
+				<li id="reply-${reply.id}" class="list-group-item d-flex justify-content-between">
+					<div>${reply.content}</div>
+					<div class="d-flex">
+						<div>작성자: ${reply.user.username} &nbsp;</div>
+						<c:if test="${reply.user.username == principal.username }">
+						<button  onclick="postObject.replyDelete(${post.id},${reply.id})" class="badge bg-dark">삭제</button>
+						</c:if>
+					</div>
+				</li>	
+			</c:forEach>
+		</ul>
+	</div>
+	
 </div>
 <script>
 	$(document).ready(function() {
