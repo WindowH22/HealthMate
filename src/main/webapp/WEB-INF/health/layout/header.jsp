@@ -1,6 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
 
+<!-- 브라우저가 인증에 성공했는지 확인한다. -->
+<sec:authorize access="isAuthenticated()">
+	<!-- JSP 파일에서 사용할 인증과 관련한 변수를 초기화 한다. 
+		property값은 고정 , var 값  이름 변경 가능 
+	-->
+	<sec:authentication property="principal" var="principal"/> 
+</sec:authorize>
 
 <!DOCTYPE html>
 <html lang="en">
